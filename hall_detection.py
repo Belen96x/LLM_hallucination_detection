@@ -2,7 +2,7 @@ prompt = '''
 
 You are an expert translator of Spanish and English. Your task will be to assess if the translations pairs you are presented with contain hallucinations or not. An hallucination is a translation that contains information completely unrelated to the source.
 
-PROCESS:
+PROCESS: 
 
 1. Read carefully the sentence pairs 
 2. Identify if hallucinations are present 
