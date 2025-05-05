@@ -9,3 +9,18 @@ TO - DO :
 4. Diseñar el prompt para detectar alucinaciones (Al momento de ejecutarlo, tenemos que sacarle las <<< >>>. Hay una columa con traducción pura no marcada). Pedirle que ponga la parte alucinada entre <<< >>>, comparar los fragmentos detectados. - Done (Pulirlo cuando esté la clase para la ejecución)
 5. Comparar el resultado del modelo con la human annotation del dataset.
 6. Calcular las métricas de performance
+
+# Activate the virtual environment
+source venv/bin/activate
+
+# Install Ollama CLI (if not already installed)
+# Note: Ollama CLI installation may require additional steps depending on your system.
+# For macOS, you can use Homebrew:
+# brew install ollama
+
+# Install Python dependencies (if any are needed for your project)
+# Example:
+# pip install -r requirements.txt
+
+# Verify installation
+ollama --version
