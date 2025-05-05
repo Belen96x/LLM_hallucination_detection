@@ -13,14 +13,9 @@ TO - DO :
 # Activate the virtual environment
 source venv/bin/activate
 
-# Install Ollama CLI (if not already installed)
-# Note: Ollama CLI installation may require additional steps depending on your system.
+# Install Ollama CLI 
 # For macOS, you can use Homebrew:
 # brew install ollama
-
-# Install Python dependencies (if any are needed for your project)
-# Example:
-# pip install -r requirements.txt
 
 # Verify installation
 ollama --version
