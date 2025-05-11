@@ -155,7 +155,7 @@ def process_all_rows(file_path, output_path, model_name):
 
 # Example usage
 if __name__ == "__main__":
-    model_name = "llama3.1:latest"  # Updated to use a specific model available in Ollama
+    model_name = "gemma2:2b"  # Updated to use a specific model available in Ollama
     input_csv_path = "data/data.csv"
     output_csv_path = f"data/output_{model_name}.csv"  # Dynamically set output file name based on model_name
 

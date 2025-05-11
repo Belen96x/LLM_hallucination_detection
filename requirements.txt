@@ -1,2 +1,3 @@
 unbabel-comet
 ollama
+matplotlib
