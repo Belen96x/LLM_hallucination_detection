@@ -8,10 +8,6 @@ __pycache__/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# Data files
-data/*.csv
-data/*.tsv
-
 # Logs
 *.log
 
