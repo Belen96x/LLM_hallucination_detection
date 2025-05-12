@@ -1,7 +1,8 @@
 import subprocess
 import csv
 import time
-from hall_detection import prompt
+import re
+from hall_detection_oneshot import prompt
 
 def run_ollama(model: str, prompt: str) -> str:
     """
@@ -48,7 +49,7 @@ def process_all_rows(file_path, output_path, model_name):
     """
     with open(file_path, mode='r', encoding='utf-8') as infile, open(output_path, mode='w', encoding='utf-8', newline='') as outfile:
         reader = csv.DictReader(infile)
-        fieldnames = reader.fieldnames + ['prediction', 'prediction_class']
+        fieldnames = ['src_lang', 'tgt_lang', 'src_text', 'mt_text', 'ground_truth_text', 'ground_truth_classification', 'raw_output']  # Updated columns to keep only the specified ones
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
 
         writer.writeheader()
@@ -64,14 +65,22 @@ def process_all_rows(file_path, output_path, model_name):
             try:
                 model_output = run_ollama(model_name, formatted_prompt)
 
-                output_lines = model_output.split('\n')
-                result = output_lines[0].strip()
-                classification = output_lines[1].strip() if len(output_lines) > 1 else ""
+                # Log the raw output from the model
+                print("Raw model output:", model_output)
 
-                row['prediction'] = result
-                row['prediction_class'] = classification
+                # Store the raw output directly in the prediction column
+                row['raw_output'] = model_output
 
-                writer.writerow(row)
+                # Write the row to the output file
+                writer.writerow({
+                    'src_lang': row['src_lang'],
+                    'tgt_lang': row['tgt_lang'],
+                    'src_text': row['src_text'],
+                    'mt_text': row['mt_text'],
+                    'ground_truth_text': row['hall_spans'],
+                    'ground_truth_classification': row['class_hall'],
+                    'raw_output': row['raw_output']
+                })
 
                 progress = ((index + 1) / total_rows) * 100
                 print(f"Progress: {progress:.2f}% completed", end='\r')
@@ -85,8 +94,8 @@ def process_all_rows(file_path, output_path, model_name):
 
 # Example usage
 if __name__ == "__main__":
-    model_name = "qwen:latest"
+    model_name = "llama3.1:latest"
     input_csv_path = "data/data_filtered.csv"
-    output_csv_path = f"data/output_v2_qwen.csv"
+    output_csv_path = f"data/output_oneshot_llama3.csv"
 
     process_all_rows(input_csv_path, output_csv_path, model_name)
