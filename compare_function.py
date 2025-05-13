@@ -83,6 +83,6 @@ def check_labels(input_file, output_file):
 
 # Example usage
 if __name__ == "__main__":
-    input_csv_path = "data/output_zeroshot_llama3.csv"
-    output_csv_path = "results/comparison_zeroshot_llama3.csv"
+    input_csv_path = "data/output_oneshot_gemma2.csv"
+    output_csv_path = "results/comparison_oneshot_gemma2.csv"
     check_labels(input_csv_path, output_csv_path)

@@ -2,7 +2,7 @@ import subprocess
 import csv
 import time
 import re
-from hall_detection_oneshot import prompt
+from hall_detection_zeroshot import prompt
 
 def run_ollama(model: str, prompt: str) -> str:
     """
@@ -94,8 +94,8 @@ def process_all_rows(file_path, output_path, model_name):
 
 # Example usage
 if __name__ == "__main__":
-    model_name = "llama3.1:latest"
+    model_name = "gemma2:2b"
     input_csv_path = "data/data_filtered.csv"
-    output_csv_path = f"data/output_oneshot_llama3.csv"
+    output_csv_path = f"data/output_zeroshot_gemma2.csv"
 
     process_all_rows(input_csv_path, output_csv_path, model_name)

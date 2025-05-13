@@ -101,8 +101,8 @@ def analyze_results(input_csv, output_folder, model, model_name):
 
 # Example usage
 if __name__ == "__main__":
-    model = "oneshot_llama3"
-    model_name = "One-Shot Llama3"
+    model = "oneshot_gemma2"
+    model_name = "One-Shot Gemma2"
     input_csv_path = f"results/comparison_{model}.csv"
     output_folder = "results"
     analyze_results(input_csv_path, output_folder, model, model_name)
