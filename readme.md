@@ -8,14 +8,14 @@ This repository contains code and data for evaluating hallucination detection in
 1. Clone the repository:
    ```bash
    git clone https://github.com/Belen96x/MT_final_project
-   cd mt-hallucination-detection
+   cd mt-hallucination-detection```
 
 2. Create and activate a virtual environment
-```python3 -m venv venv
-source venv/bin/activate
+    ```python3 -m venv venv
+    source venv/bin/activate```
 
 3. Install dependencies
-```pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 ## Usage
 1. Run Detection
@@ -24,7 +24,7 @@ source venv/bin/activate
   --model llama3.1:latest \
   --prompt-module hall_detection_oneshot \
   --input data/data_filtered.csv \
-  --output results/output_llama3_oneshot.csv
+  --output results/output_llama3_oneshot.csv```
 
 - The model can be changed for the ones available in Ollama.
 - The prompt modules available are:
@@ -36,7 +36,7 @@ source venv/bin/activate
 
 ```python compare_function.py \
   --input data/output_llama3_oneshot.csv \
-  --output results/comparison_oneshot_llama3.csv
+  --output results/comparison_oneshot_llama3.csv```
 
 - Be sure to match the input file path with the one created in the previous step.
 
@@ -46,7 +46,7 @@ source venv/bin/activate
   --model zeroshot_llama3 \
   --model-name "Zero-Shot Llama3" \
   --input results/comparison_zeroshot_llama3.csv \
-  --output-folder results
+  --output-folder results```
 
 - The prompt "model" will integrate the name of the output files.
 - The "model-name" will be the one show in the plots.
