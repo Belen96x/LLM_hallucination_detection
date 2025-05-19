@@ -7,8 +7,8 @@ This repository contains code and data for evaluating hallucination detection in
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Belen96x/MT_final_project
-   cd mt-hallucination-detection```
+   git clone https://github.com/Belen96x/LLM_hallucination_detection
+   cd mt-hallucination-detection
 
 2. Create and activate a virtual environment
     ```python3 -m venv venv
