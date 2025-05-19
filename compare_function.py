@@ -1,5 +1,6 @@
 import csv
 import re
+import argparse
 from comet import download_model, load_from_checkpoint
 
 # Load the COMET model
@@ -83,6 +84,8 @@ def check_labels(input_file, output_file):
 
 # Example usage
 if __name__ == "__main__":
-    input_csv_path = "data/output_oneshot_gemma2.csv"
-    output_csv_path = "results/comparison_oneshot_gemma2.csv"
-    check_labels(input_csv_path, output_csv_path)
+    parser = argparse.ArgumentParser(description='Compare function for hallucination labels and COMET scores')
+    parser.add_argument('--input', '-i', required=True, help='Input CSV file path')
+    parser.add_argument('--output', '-o', required=True, help='Output CSV file path')
+    args = parser.parse_args()
+    check_labels(args.input, args.output)

@@ -2,7 +2,8 @@ import subprocess
 import csv
 import time
 import re
-from hall_detection_zeroshot import prompt
+import argparse
+import importlib
 
 def run_ollama(model: str, prompt: str) -> str:
     """
@@ -38,7 +39,7 @@ def run_ollama(model: str, prompt: str) -> str:
         raise RuntimeError("Ollama CLI is not installed. Please install it from https://ollama.ai.")
 
 
-def process_all_rows(file_path, output_path, model_name):
+def process_all_rows(file_path, output_path, model_name, prompt):
     """
     Process each row from input CSV using Ollama and save predictions to output CSV.
 
@@ -46,6 +47,7 @@ def process_all_rows(file_path, output_path, model_name):
         file_path (str): Path to the input CSV file.
         output_path (str): Path to the output CSV file.
         model_name (str): Ollama model name (e.g., 'gemma2:2b').
+        prompt (str): The input prompt for the model.
     """
     with open(file_path, mode='r', encoding='utf-8') as infile, open(output_path, mode='w', encoding='utf-8', newline='') as outfile:
         reader = csv.DictReader(infile)
@@ -93,9 +95,19 @@ def process_all_rows(file_path, output_path, model_name):
 
 
 # Example usage
-if __name__ == "__main__":
-    model_name = "gemma2:2b"
-    input_csv_path = "data/data_filtered.csv"
-    output_csv_path = f"data/output_zeroshot_gemma2.csv"
+def main():
+    parser = argparse.ArgumentParser(description='Run Ollama integration')
+    parser.add_argument('--model', type=str, required=True, help='Ollama model name (e.g., llama3.1:latest)')
+    parser.add_argument('--prompt-module', type=str, required=True, help='Prompt module to use (e.g., hall_detection_oneshot or hall_detection_zeroshot)')
+    parser.add_argument('--input', type=str, default='data/data_filtered.csv', help='Input CSV file path')
+    parser.add_argument('--output', type=str, required=True, help='Output CSV file path')
+    args = parser.parse_args()
 
-    process_all_rows(input_csv_path, output_csv_path, model_name)
+    # Dynamically import the prompt
+    prompt_mod = importlib.import_module(args.prompt_module)
+    prompt = prompt_mod.prompt
+
+    process_all_rows(args.input, args.output, args.model, prompt)
+
+if __name__ == '__main__':
+    main()

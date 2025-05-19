@@ -2,6 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import argparse
 
 def analyze_results(input_csv, output_folder, model, model_name):
     """
@@ -101,8 +102,10 @@ def analyze_results(input_csv, output_folder, model, model_name):
 
 # Example usage
 if __name__ == "__main__":
-    model = "zeroshot_gemma2"
-    model_name = "Zero-Shot Gemma2"
-    input_csv_path = f"results/comparison_{model}.csv"
-    output_folder = "results"
-    analyze_results(input_csv_path, output_folder, model, model_name)
+    parser = argparse.ArgumentParser(description='Analyze results and generate diagnostic plots')
+    parser.add_argument('--model', required=True, help='Internal model identifier, e.g., zeroshot_llama3')
+    parser.add_argument('--model-name', dest='model_name', required=True, help='Display name for plots, e.g., "Zero-Shot Llama3"')
+    parser.add_argument('--input', dest='input_csv', required=True, help='Path to the comparison CSV file')
+    parser.add_argument('--output-folder', dest='output_folder', required=True, help='Directory to save output plots')
+    args = parser.parse_args()
+    analyze_results(args.input_csv, args.output_folder, args.model, args.model_name)
