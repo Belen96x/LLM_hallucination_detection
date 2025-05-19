@@ -11,16 +11,16 @@ This repository contains code and data for evaluating hallucination detection in
    cd mt-hallucination-detection
 
 2. Create and activate a virtual environment
-python3 -m venv venv
+```python3 -m venv venv
 source venv/bin/activate
 
 3. Install dependencies
-pip install -r requirements.txt
+```pip install -r requirements.txt
 
 ## Usage
 1. Run Detection
 
-python ollama_integration.py \
+```python ollama_integration.py \
   --model llama3.1:latest \
   --prompt-module hall_detection_oneshot \
   --input data/data_filtered.csv \
@@ -34,7 +34,7 @@ python ollama_integration.py \
 
 2. Compare with human labels
 
-python compare_function.py \
+```python compare_function.py \
   --input data/output_llama3_oneshot.csv \
   --output results/comparison_oneshot_llama3.csv
 
@@ -42,7 +42,7 @@ python compare_function.py \
 
 3. Analyze Results
 
-python results_analysis.py \
+```python results_analysis.py \
   --model zeroshot_llama3 \
   --model-name "Zero-Shot Llama3" \
   --input results/comparison_zeroshot_llama3.csv \
